@@ -6,10 +6,9 @@ import lombok.RequiredArgsConstructor;
 import microservices.book.multiplication.domain.MultiplicationResultAttempt;
 import microservices.book.multiplication.service.MultiplicationService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Javad Alimohammadi<bs.alimohammadi@gmail.com>
@@ -32,6 +31,12 @@ public class MultiplicationResultAttemptController {
         private final boolean correct;
     }
 
+
+    @GetMapping
+    public ResponseEntity<List<MultiplicationResultAttempt>> getStatistics(@RequestParam("alias") String alias) {
+        return ResponseEntity.ok(multiplicationService.getStatsForUser(alias)
+        );
+    }
 
     @PostMapping
     public ResponseEntity<MultiplicationResultAttempt> postResult(@RequestBody MultiplicationResultAttempt multiplicationResultAttempt) {
