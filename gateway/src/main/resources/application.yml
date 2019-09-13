@@ -1,0 +1,37 @@
+server:
+  port: 8000
+
+zuul:
+  prefix: /api
+  routes:
+    multiplications:
+      path: /multiplications/**
+      url: http://localhost:8080/multiplications
+
+    results:
+      path: /results/**
+      url: http://localhost:8080/results
+
+    leaders:
+      path: /leaders/**
+      url: http://localhost:8081/leaders
+
+    stats:
+      path: /stats/**
+      url: http://localhost:8081/stats
+  trace-request-body: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: routes,filters
+
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          netflix: trace
