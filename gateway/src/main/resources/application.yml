@@ -24,7 +24,7 @@ zuul:
       path: /stats/**
       url: http://localhost:8081/stats
       strip-prefix: false
-      
+
   trace-request-body: true
 
 
